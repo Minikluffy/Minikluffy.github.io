@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#060713">
+  <meta name="description" content="YANKI Story Edition privacy policy / Hikâye Sürümü gizlilik politikası">
+  <title>YANKI // Gizlilik Politikası</title>
+  <style>
+    :root{--void:#050611;--deep:#090c1d;--panel:#0d1429;--panel2:#101a35;--cyan:#35e7ff;--cyan2:#158aa4;--gold:#ffc857;--rose:#ff5d8f;--ink:#f0f7ff;--muted:#9fb2c9;--line:#203354;--px:4px}
+    *{box-sizing:border-box}
+    html{background:var(--void);scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);font-family:Consolas,"Courier New",monospace;line-height:1.65;background:
+      radial-gradient(circle at 50% -10%,rgba(53,231,255,.16),transparent 34rem),
+      linear-gradient(rgba(53,231,255,.025) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(53,231,255,.025) 1px,transparent 1px),var(--void);
+      background-size:auto,24px 24px,24px 24px;min-height:100vh}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(0,0,0,.12) 3px 4px);z-index:20}
+    .shell{width:min(980px,calc(100% - 28px));margin:auto;padding:28px 0 64px}
+    .pixel-frame{border:var(--px) solid var(--cyan2);box-shadow:0 0 0 var(--px) #07101f,0 0 0 calc(var(--px)*2) var(--line),0 18px 60px rgba(0,0,0,.45);background:linear-gradient(180deg,rgba(16,26,53,.96),rgba(8,12,29,.98));position:relative}
+    .pixel-frame:before,.pixel-frame:after{content:"";position:absolute;width:16px;height:16px;background:var(--gold);box-shadow:0 0 18px rgba(255,200,87,.6)}
+    .pixel-frame:before{left:-4px;top:-4px}.pixel-frame:after{right:-4px;bottom:-4px}
+    header{padding:36px 24px 30px;text-align:center;overflow:hidden}
+    .signal{height:62px;display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:8px}
+    .signal i{display:block;width:6px;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:pulse 1.8s steps(4,end) infinite}
+    .signal i:nth-child(1),.signal i:nth-child(9){height:8px}.signal i:nth-child(2),.signal i:nth-child(8){height:18px}.signal i:nth-child(3),.signal i:nth-child(7){height:32px}.signal i:nth-child(4),.signal i:nth-child(6){height:48px}.signal i:nth-child(5){height:62px;background:var(--gold);box-shadow:0 0 14px var(--gold)}
+    @keyframes pulse{50%{transform:scaleY(.55);opacity:.65}}
+    h1{font-size:clamp(34px,8vw,72px);line-height:1;margin:8px 0;letter-spacing:.18em;color:var(--gold);text-shadow:4px 4px 0 #7a4218,0 0 24px rgba(255,200,87,.35)}
+    .kicker{color:var(--cyan);font-size:12px;letter-spacing:.22em;text-transform:uppercase}
+    .status{display:inline-flex;gap:10px;align-items:center;margin-top:20px;padding:8px 12px;border:2px solid #23506a;background:#071321;color:#bff7ff;font-size:12px}
+    .status b{width:8px;height:8px;background:#46ef9c;box-shadow:0 0 10px #46ef9c}
+    nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}
+    nav a{color:var(--ink);text-decoration:none;text-align:center;padding:13px;border:3px solid var(--line);background:#0a1023;font-weight:700;letter-spacing:.08em}
+    nav a:hover,nav a:focus{border-color:var(--cyan);color:var(--cyan);outline:none;transform:translateY(-2px)}
+    .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+    .chip{padding:14px;border:3px solid var(--line);background:#091124;text-align:center;color:var(--muted);font-size:12px}
+    .chip strong{display:block;color:var(--cyan);font-size:14px;margin-bottom:4px}
+    section{padding:28px;margin-top:20px;scroll-margin-top:16px}
+    h2{margin:0 0 18px;font-size:20px;color:var(--gold);letter-spacing:.1em}
+    h2:before{content:"> ";color:var(--cyan)}
+    h3{font-size:14px;color:var(--cyan);margin:26px 0 8px;text-transform:uppercase;letter-spacing:.08em}
+    p{margin:9px 0;color:#dce9f6}
+    ul{margin:10px 0;padding:0;list-style:none}
+    li{position:relative;padding:7px 0 7px 24px;color:#dce9f6}
+    li:before{content:"◆";position:absolute;left:2px;color:var(--gold);font-size:10px;top:10px}
+    .callout{margin-top:22px;padding:16px;border-left:5px solid var(--rose);background:#1a1023;color:#ffdceb}
+    .contact{padding:20px;margin-top:20px;text-align:center;border:3px dashed var(--cyan2);background:#071321}
+    .contact strong{display:block;color:var(--gold);font-size:clamp(15px,4vw,21px);margin-top:7px}
+    footer{text-align:center;color:var(--muted);font-size:12px;margin-top:28px}
+    .tiny{color:#71859d;font-size:11px}
+    @media(max-width:680px){.summary{grid-template-columns:1fr}.shell{width:min(100% - 18px,980px)}section{padding:20px 16px}header{padding:28px 14px}nav{grid-template-columns:1fr}h1{letter-spacing:.1em}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="pixel-frame">
+      <div class="signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="kicker">Yakutra Games // Story Edition</div>
+      <h1>YANKI</h1>
+      <div class="kicker">Gizlilik Politikası / Privacy Policy</div>
+      <div class="status"><b aria-hidden="true"></b> SÜRÜM 3.0.1 · ÇEVRİMDIŞI HİKÂYE</div>
+    </header>
+
+    <nav aria-label="Dil / Language">
+      <a href="#turkce">TÜRKÇE</a>
+      <a href="#english">ENGLISH</a>
+    </nav>
+
+    <div class="summary" aria-label="Özet / Summary">
+      <div class="chip"><strong>REKLAM YOK</strong>NO ADS</div>
+      <div class="chip"><strong>TAKİP YOK</strong>NO TRACKING</div>
+      <div class="chip"><strong>HESAP YOK</strong>NO ACCOUNT</div>
+    </div>
+
+    <section id="turkce" class="pixel-frame">
+      <h2>TÜRKÇE</h2>
+      <p><strong>Son güncelleme: 11 Ekim 2026.</strong> YANKI kişisel verileri otomatik olarak toplamaz. Bu sürüm tek oyunculu Hikâye Sürümüdür; multiplayer ve arena arayüzleri kapalıdır.</p>
+
+      <h3>01 // Cihazda saklanan veriler</h3>
+      <ul>
+        <li>Bölüm ilerlemesi, ayarlar, rozetler, görevler, yüksek skorlar ve oyuncunun seçtiği takma ad cihazın yerel depolamasında tutulur.</li>
+        <li>Bu veriler Yakutra Games'e otomatik olarak gönderilmez.</li>
+        <li>Uygulama verilerini temizlemek veya oyunu kaldırmak cihazdaki kayıtları siler.</li>
+      </ul>
+
+      <h3>02 // Ağ ve çevrimiçi sıralama</h3>
+      <p>YANKI reklamsızdır; analiz (analytics), reklam SDK'sı, çerez ve üçüncü taraf takip içermez. Hesap, üyelik, e-posta, telefon, konum, kişi listesi, kamera veya mikrofon istemez.</p>
+      <p>Hikâye sürümü bir sıralama sunucu adresi olmadan yayınlanır ve tamamen çevrimdışı oynanabilir. İsteğe bağlı sıralama gelecekte ayrıca yapılandırılır ve oyuncu gönderimi seçerse yalnızca <strong>takma ad, skor, combo, kill sayısı, zorluk ve mod</strong> alanları iletilir. IP adresi ağ iletişiminin teknik parçası olarak barındırma sağlayıcısının standart sunucu kayıtlarında kısa süreli görünebilir. Arena ve multiplayer bu sürümde oyuncuya sunulmaz.</p>
+
+      <h3>03 // Paylaşım, saklama ve silme</h3>
+      <p>Cihazdaki kayıtlar üçüncü taraflarla paylaşılmaz veya satılmaz. Yapılandırılmış bir sıralamaya gönüllü gönderilen kayıt tablonun çalışması için saklanabilir. Erişim veya silme talebi aşağıdaki adrese gönderilebilir.</p>
+
+      <h3>04 // Çocuklar ve güvenlik</h3>
+      <p>Oyun çocuklara yönelik davranışsal reklam veya takip kullanmaz. Bilerek gerçek ad, e-posta veya kesin konum gibi doğrudan tanımlayıcılar istemez.</p>
+
+      <h3>05 // Bu sayfa</h3>
+      <p>Bu politika GitHub Pages üzerinde barındırılabilir. Sayfanın kendisi JavaScript, çerez, analiz veya harici kaynak kullanmaz. GitHub, barındırma güvenliği için standart erişim günlükleri işleyebilir; bu, oyunun veri toplaması değildir.</p>
+
+      <div class="contact">SORU · ERİŞİM · SİLME TALEBİ<strong>info@yakutrayazilim.com</strong></div>
+    </section>
+
+    <section id="english" class="pixel-frame">
+      <h2>ENGLISH</h2>
+      <p><strong>Last updated: October 11, 2026.</strong> YANKI does not automatically collect personal data. This release is the single-player Story Edition; multiplayer and arena interfaces are disabled.</p>
+
+      <h3>01 // Data stored on the device</h3>
+      <ul>
+        <li>Chapter progress, settings, badges, quests, high scores, and the nickname chosen by the player remain in local device storage.</li>
+        <li>These records are not automatically sent to Yakutra Games.</li>
+        <li>Clearing app data or uninstalling the game removes local records.</li>
+      </ul>
+
+      <h3>02 // Network and optional leaderboard</h3>
+      <p>YANKI has no ads, analytics, advertising SDK, cookies, or third-party tracking. It does not request an account, membership, email, phone, location, contacts, camera, or microphone.</p>
+      <p>The Story Edition ships without a leaderboard server address and is fully offline. If an optional online leaderboard is configured in a future build and the player chooses to submit, it sends only <strong>nickname, score, combo, kill count, difficulty, and mode</strong>. An IP address may briefly appear in standard hosting logs as a technical part of network communication. Arena and multiplayer are unavailable to players in this release.</p>
+
+      <h3>03 // Sharing, retention, and deletion</h3>
+      <p>Local records are not shared with third parties or sold. A voluntary leaderboard entry may be retained so a configured board can operate. Access or deletion requests can be sent to the address below.</p>
+
+      <h3>04 // Children and security</h3>
+      <p>The game does not use behavioral advertising or tracking aimed at children. It does not knowingly request direct identifiers such as a legal name, email address, or precise location.</p>
+
+      <h3>05 // This page</h3>
+      <p>This policy may be hosted on GitHub Pages. The page itself uses no JavaScript, cookies, analytics, or external resources. GitHub may process standard access logs to secure its hosting service; that is separate from data collection by the game.</p>
+
+      <div class="contact">QUESTIONS · ACCESS · DELETION<strong>info@yakutrayazilim.com</strong></div>
+    </section>
+
+    <div class="callout">YANKI 3.0.1 // Hikâye modu doğrudan açılır. Multiplayer kodu geliştirme arşivinde korunur ancak bu Play Store paketinde oyuncuya sunulmaz.</div>
+    <footer>© 2026 Yakutra Games · YANKI<br><span class="tiny">LIGHT LIES. ECHOES REMEMBER.</span></footer>
+  </main>
+</body>
+</html>
