@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GraviShift — Gizlilik Politikası</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; background: #05060c; color: #dceef7; font: 16px/1.65 system-ui, -apple-system, Segoe UI, sans-serif; }
+    main { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+    h1 { font-size: clamp(28px, 6vw, 44px); line-height: 1.1; margin: 0 0 8px; }
+    h2 { margin: 36px 0 10px; font-size: 20px; color: #5ef2ff; }
+    p, li { color: #b8cdd9; }
+    strong { color: #f2fbff; }
+    .meta { color: #7f99a8; font-size: 14px; }
+    a { color: #5ef2ff; }
+    .card { border: 1px solid #1b3342; border-radius: 16px; padding: 18px 20px; background: #0a111b; }
+    code { color: #ffe7a8; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="meta">Yakutra Yazılım · Son güncelleme: 21 Ekim 2026</p>
+    <h1>GraviShift: Boyutsal Çekirdek<br>Gizlilik Politikası</h1>
+
+    <div class="card">
+      <strong>Özet:</strong> GraviShift hiçbir kişisel veri toplamaz, hiçbir sunucuya veri
+      göndermez, reklam veya analitik içermez ve çalışmak için ağ izni istemez.
+    </div>
+
+    <h2>1. Veri sorumlusu</h2>
+    <p>
+      Yakutra Yazılım, Ankara, Türkiye.<br>
+      İletişim: <a href="mailto:yakutrayazilim@gmail.com">yakutrayazilim@gmail.com</a>
+    </p>
+
+    <h2>2. Toplanan veriler</h2>
+    <p>
+      GraviShift; ad, e-posta, telefon numarası, konum, kişiler, cihaz kimliği, reklam
+      kimliği, kullanım istatistiği veya benzeri hiçbir veriyi toplamaz. Uygulamanın
+      sunucusu yoktur; oyun tamamen cihaz üzerinde çalışır.
+    </p>
+
+    <h2>3. Cihazda saklanan veriler</h2>
+    <p>
+      Oyun ilerlemesi, yıldızlar, açılan bölümler ve ses/titreşim/hareket ayarları yalnızca
+      cihazınızın yerel depolamasında (WebView localStorage) tutulur. Bu kayıt başka bir
+      yere aktarılmaz. Android ayarlarından uygulama verilerini temizleyerek veya uygulamayı
+      kaldırarak bu kaydı silebilirsiniz. Kayıt, uygulama tarafından okunabilirliği artırmak
+      için XOR ile gizlenir; bu bir şifreleme iddiası değildir.
+    </p>
+
+    <h2>4. İzinler</h2>
+    <p>
+      Uygulama hiçbir çalışma zamanı Android izni istemez ve ilk açılışta izin diyaloğu
+      göstermez. Özellikle <code>INTERNET</code> izni yoktur; reklam, analitik, bulut kayıt
+      veya uzaktan içerik yükleme yapılamaz. Manifestte yalnızca normal
+      <code>android.permission.VIBRATE</code> izni (titreşim ayarı açıksa dokunsal geri
+      bildirim için; otomatik verilir, kullanıcıya sorulmaz) ve AndroidX'in imza korumalı
+      <code>DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</code> izni bulunur. Bu izinler kişisel
+      veriye erişim sağlamaz.
+    </p>
+
+    <h2>5. Üçüncü taraflar</h2>
+    <p>
+      Reklam ağı, analitik sağlayıcı, sosyal medya SDK'sı, ödeme altyapısı veya veri
+      simsarı yoktur. Uygulama içi satın alma yoktur. WebView ve Android işletim sistemi
+      dışında üçüncü taraf bileşeni çalışmaz.
+    </p>
+
+    <h2>6. Çocuklar</h2>
+    <p>
+      Veri toplanmadığı için çocuklara yönelik özel bir veri işleme faaliyeti de yoktur.
+      Oyun şiddet, kumar, kullanıcı içeriği veya sohbet içermez.
+    </p>
+
+    <h2>7. Değişiklikler</h2>
+    <p>
+      Bu politika değişirse güncel sürüm bu sayfada yayımlanır ve “son güncelleme” tarihi
+      yenilenir. Veri toplama başlatılması gibi esaslı bir değişiklik olursa mağaza
+      açıklamasında ayrıca duyurulur.
+    </p>
+
+    <h2>8. İletişim</h2>
+    <p>
+      Gizlilikle ilgili sorular için
+      <a href="mailto:yakutrayazilim@gmail.com">yakutrayazilim@gmail.com</a> adresine yazabilirsiniz.
+    </p>
+  </main>
+</body>
+</html>
