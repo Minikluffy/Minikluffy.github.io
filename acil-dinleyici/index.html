@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acil Dinleyici - APK Indirme</title>
+<style>
+body { font-family: sans-serif; background:#111; color:#eee; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; }
+.card { background:#1e1e1e; padding:2rem; border-radius:12px; max-width:420px; width:90%; box-shadow:0 8px 32px #0008; }
+h1 { color:#ff5252; }
+input,button { width:100%; padding:12px; margin:8px 0; border-radius:8px; border:1px solid #333; background:#2a2a2a; color:#eee; font-size:16px; }
+button { background:#ff5252; border:none; cursor:pointer; }
+.hidden { display:none; }
+.note { font-size:13px; color:#aaa; margin-top:12px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Acil Dinleyici</h1>
+  <p>APK indirme sayfasi. Erisim icin sifreyi girin.</p>
+  <div id="gate">
+    <input id="pw" type="password" placeholder="Sifre" />
+    <button onclick="check()">Gir</button>
+    <p id="err" class="note" style="color:#ff5252"></p>
+  </div>
+  <div id="content" class="hidden">
+    <p>Indirme hazir. APK dosyasini telefonunuza indirin.</p>
+    <a id="dl" href="#" download><button>APK Indir</button></a>
+    <p class="note">Not: APK henuz derlenmedi. Android Studio ile derlendikten sonra bu linke eklenecek.</p>
+  </div>
+</div>
+<script>
+function check(){
+  const v=document.getElementById('pw').value;
+  if(v==='21210000'){
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('content').classList.remove('hidden');
+  } else {
+    document.getElementById('err').textContent='Hatali sifre';
+  }
+}
+</script>
+</body>
+</html>
+```, path="C:/Users/luffy/netlify-site/index.html")
