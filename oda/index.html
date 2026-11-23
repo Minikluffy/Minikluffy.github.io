@@ -65,10 +65,24 @@ button.ana:hover{background:#00ffb4;color:#04241a}
 <script>
 const API = '';
 let cihazlar = [], aktif = null;
+let ODA_KEY = localStorage.getItem('oda_key') || '';
+
+function apiFetch(url, opt){
+  opt = opt || {};
+  opt.headers = opt.headers || {};
+  if(ODA_KEY) opt.headers['X-ODA-Token'] = ODA_KEY;
+  return fetch(url, opt);
+}
+
+function anahtarSor(){
+  if(ODA_KEY) return;
+  const k = prompt('ODA erisim anahtari (.env icindeki ODA_TOKEN):');
+  if(k){ ODA_KEY = k.trim(); localStorage.setItem('oda_key', ODA_KEY); yukle(); }
+}
 
 async function yukle(){
   try{
-    const r = await fetch(API+'/api/cihazlar');
+    const r = await apiFetch(API+'/api/cihazlar');
     const d = await r.json();
     cihazlar = d.cihazlar || [];
     document.getElementById('saat').textContent = d.zaman;
@@ -124,14 +138,14 @@ function hizliGoster(){
 async function komut(id, k){
   document.getElementById('cikti').textContent = '⏳ '+id+' → '+k;
   try{
-    const r = await fetch(API+'/api/komut',{method:'POST',headers:{'Content-Type':'application/json'},
+    const r = await apiFetch(API+'/api/komut',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({cihaz:id,komut:k})});
     const d = await r.json();
     document.getElementById('cikti').textContent = `[${id}] ${k}\n\n${d.sonuc}`;
   }catch(e){ document.getElementById('cikti').textContent = 'HATA: '+e; }
 }
 
-function baslat(){ yukle(); setInterval(yukle, 30000); }
+function baslat(){ anahtarSor(); yukle(); setInterval(yukle, 30000); }
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', baslat);
 else baslat();
 </script>
