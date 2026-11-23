@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ODA — Cihaz Kontrol Merkezi</title>
+<style>
+:root{--bg:#0b0f16;--card:#131a24;--card2:#1a2431;--acc:#00e5a0;--acc2:#ffb020;--red:#ff4d5e;--txt:#e8eef5;--mut:#7d8da3;--line:#22303f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;padding:18px;min-height:100vh;background-image:radial-gradient(circle at 15% 0%,#12202c 0%,transparent 45%),radial-gradient(circle at 85% 100%,#1a1526 0%,transparent 45%)}
+header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+h1{font-size:22px;font-weight:700;letter-spacing:-.5px}
+h1 span{color:var(--acc)}
+.saat{color:var(--mut);font-variant-numeric:tabular-nums;font-size:13px}
+.oda-baslik{color:var(--mut);font-size:12px;margin-top:3px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.kart{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:14px;padding:16px;position:relative;overflow:hidden;transition:.2s}
+.kart:hover{border-color:#35506a;transform:translateY(-2px)}
+.kart::after{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--line)}
+.kart.aktif::after{background:var(--acc)}
+.kart.kapali::after{background:var(--red)}
+.kart.ayar::after{background:var(--acc2)}
+.kart-ust{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.ikon{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:21px;background:#0d1420;border:1px solid var(--line)}
+.ad{font-weight:650;font-size:15px}
+.aciklama{color:var(--mut);font-size:11px;margin-top:2px}
+.durum{margin-left:auto;font-size:10px;font-weight:700;padding:4px 9px;border-radius:20px;letter-spacing:.5px}
+.d-AKTIF{background:#00e5a020;color:var(--acc)}
+.d-KAPALI{background:#ff4d5e20;color:var(--red)}
+.d-AYAR-GEREK,.d-BILINMEYEN{background:#ffb02020;color:var(--acc2)}
+.d-HATA{background:#ff4d5e20;color:var(--red)}
+.detay{color:var(--mut);font-size:11px;font-family:ui-monospace,monospace;background:#0a1018;border-radius:8px;padding:8px;min-height:32px;max-height:56px;overflow:auto;white-space:pre-wrap;word-break:break-all;margin-bottom:11px}
+.komutlar{display:flex;flex-wrap:wrap;gap:6px}
+button{background:#16212e;color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:7px 11px;font-size:11px;cursor:pointer;transition:.15s;font-family:inherit}
+button:hover{background:#1d2c3c;border-color:var(--acc);color:var(--acc)}
+button.ana{background:var(--acc);color:#04241a;border-color:var(--acc);font-weight:700}
+button.ana:hover{background:#00ffb4;color:#04241a}
+.terminal{grid-column:1/-1;background:#0a1018;border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:4px}
+.terminal h3{font-size:12px;color:var(--mut);margin-bottom:10px;font-weight:600}
+.cikti{font:12px/1.6 ui-monospace,SFMono-Regular,monospace;color:#9fe8cf;background:#070c12;border-radius:9px;padding:12px;min-height:90px;max-height:230px;overflow:auto;white-space:pre-wrap;word-break:break-all;margin-top:10px}
+.alt{color:var(--mut);font-size:11px;margin-top:16px;text-align:center}
+@keyframes nabiz{0%,100%{opacity:1}50%{opacity:.55}}
+.nabiz{animation:nabiz 2s infinite}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1><span>ODA</span> — Cihaz Kontrol Merkezi</h1>
+    <div class="oda-baslik">2 bilgisayar · 3 telefon · tek ekran · her cihaz diğerini yönetir</div>
+  </div>
+  <div class="saat nabiz" id="saat">--:--:--</div>
+</header>
+
+<div class="grid" id="grid"></div>
+
+<div class="terminal">
+  <h3>⌘ KOMUT / ÇIKTI — seçili cihaz: <b id="secili">—</b></h3>
+  <div class="komutlar" id="hizli"></div>
+  <div class="cikti" id="cikti">Hazır. Bir cihaz kartından komut seç.</div>
+</div>
+
+<div class="alt">ODA v1 · D:\ODA-KONTROL · token'lar dosyada, arayüze gönderilmez · sadece izinli cihazlar</div>
+
+<script>
+const API = '';
+let cihazlar = [], aktif = null;
+
+async function yukle(){
+  try{
+    const r = await fetch(API+'/api/cihazlar');
+    const d = await r.json();
+    cihazlar = d.cihazlar || [];
+    document.getElementById('saat').textContent = d.zaman;
+    ciz();
+  }catch(e){ document.getElementById('cikti').textContent = 'SUNUCU-YOK: '+e; }
+}
+
+function ciz(){
+  const g = document.getElementById('grid');
+  g.innerHTML = cihazlar.map(c=>{
+    const s = (c.durum&&c.durum.durum)||'BILINMEYEN';
+    const sinif = s==='AKTIF'?'aktif':(s==='AYAR-GEREK'?'ayar':'kapali');
+    const ikon = c.ikon==='phone'?'📱':'🖥️';
+    return `<div class="kart ${sinif}" onclick='sec("${c.id}")'>
+      <div class="kart-ust">
+        <div class="ikon">${ikon}</div>
+        <div><div class="ad">${c.ad}</div><div class="aciklama">${c.aciklama||''}</div></div>
+        <div class="durum d-${s}">${s}</div>
+      </div>
+      <div class="detay">${(c.durum&&c.durum.detay)||'—'}</div>
+      <div class="komutlar">
+        <button class="ana" onclick='event.stopPropagation();komut("${c.id}","${c.tip==='telefon'?'durum':'whoami'}")'> durum </button>
+        ${c.tip==='telefon'?
+          `<button onclick='event.stopPropagation();komut("${c.id}","batarya")'>batarya</button>
+           <button onclick='event.stopPropagation();komut("${c.id}","konum")'>konum</button>
+           <button onclick='event.stopPropagation();komut("${c.id}","ag")'>ağ</button>
+           <button onclick='event.stopPropagation();komut("${c.id}","uygulamalar")'>uygulamalar</button>`:
+          `<button onclick='event.stopPropagation();komut("${c.id}","hostname")'>hostname</button>
+           <button onclick='event.stopPropagation();komut("${c.id}","disk")'>disk</button>
+           <button onclick='event.stopPropagation();komut("${c.id}","bellek")'>bellek</button>
+           <button onclick='event.stopPropagation();komut("${c.id}","tarih")'>tarih</button>`}
+      </div>
+    </div>`;
+  }).join('');
+  if(aktif) hizliGoster();
+}
+
+function sec(id){
+  aktif = cihazlar.find(c=>c.id===id);
+  document.getElementById('secili').textContent = aktif?aktif.ad:'—';
+  document.getElementById('cikti').textContent = 'Seçili: '+(aktif?aktif.ad:'—');
+  hizliGoster();
+}
+
+function hizliGoster(){
+  if(!aktif) return;
+  const k = aktif.tip==='telefon'
+    ? ['durum','batarya','konum','ag','uygulamalar','islemci','bellek','disk','ekran']
+    : ['whoami','hostname','date','disk','bellek','islemci','ping','ls','uptime'];
+  document.getElementById('hizli').innerHTML = k.map(x=>`<button onclick='komut("${aktif.id}","${x}")'>${x}</button>`).join('');
+}
+
+async function komut(id, k){
+  document.getElementById('cikti').textContent = '⏳ '+id+' → '+k;
+  try{
+    const r = await fetch(API+'/api/komut',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({cihaz:id,komut:k})});
+    const d = await r.json();
+    document.getElementById('cikti').textContent = `[${id}] ${k}\n\n${d.sonuc}`;
+  }catch(e){ document.getElementById('cikti').textContent = 'HATA: '+e; }
+}
+
+function baslat(){ yukle(); setInterval(yukle, 30000); }
+if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', baslat);
+else baslat();
+</script>
+</body>
+</html>
